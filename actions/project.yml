@@ -1,0 +1,15 @@
+on: 
+  pull_request:
+    types: [opened, reopened]
+# Ref: https://docs.github.com/pt/actions/using-workflows/events-that-trigger-workflows
+jobs:
+  eslint:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '12'
+    - run: npm install
+    - run: npx eslint
+# Ref: https://docs.github.com/pt/actions/learn-github-actions/understanding-github-actions
