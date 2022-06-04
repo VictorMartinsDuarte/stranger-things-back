@@ -19,7 +19,7 @@ const strangerThingsService = new StrangerThingsService(
 
 app.use(cors());
 
-const hereIsTheUpsideDown = (process.env.UPSIDEDOWN_MODE === 'true');
+const hereIsTheUpsideDown = process.env.UPSIDEDOWN_MODE || true;
 
 app.get('/', (req, res) => {
   const characters = strangerThingsService.search(
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
   res.status(200).json(characters);
 });
 
+// Ref port on listen: https://stackoverflow.com/questions/15693192/heroku-node-js-error-web-process-failed-to-bind-to-port-within-60-seconds-of
 app.listen((process.env.PORT || 3000), () => {
   console.log(`Escutando na porta ${PORT}`);
 });
